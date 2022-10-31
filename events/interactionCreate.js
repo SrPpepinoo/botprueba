@@ -13,16 +13,6 @@ module.exports = {
 
       command.execute(interaction, client);
     } 
-    if (interaction.id === '1036629620230987796') {
-      const role = interaction.guild.roles.cache.get("902225843001122906");
-      return interaction.member.roles
-        .add(role)
-        .then((member) =>
-          interaction.reply({
-            content: `${role} se ha asignado.`,
-            ephemeral: true,
-          }),
-        );
-    }
+    
   },
 };
