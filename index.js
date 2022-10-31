@@ -20,6 +20,20 @@ client.once(Events.ClientReady, () => {
 });
 
 client.on(Events.InteractionCreate, async interaction => {
+	//should move to another file or make a new "handler"
+	const db = JSON.parse(fs.readFileSync('./data/channels.json'))
+	if (interaction.channel.id === db.verify) {
+		const role = interaction.guild.roles.cache.get("902225843001122906");
+		return interaction.member.roles
+			.add(role)
+			.then((member) =>
+				interaction.reply({
+					content: `${role} se ha asignado.`,
+					ephemeral: true,
+				}),
+			);
+	}
+	//should move to another file or make a new "handler"
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);

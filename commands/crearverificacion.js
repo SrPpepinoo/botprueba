@@ -1,5 +1,5 @@
 const {EmbedBuilder, ButtonStyle, ActionRowBuilder, ButtonBuilder, SlashCommandBuilder, CommandInteraction, PermissionFlagsBits, Client} = require('discord.js');
-
+const fs = require('fs')
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('crearverificacion')
@@ -12,6 +12,12 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
         const channel = interaction.options.getChannel('canal');
+        //CRUD FOR REUSE
+        const channelData = JSON.parse(fs.readFileSync('./data/channels.json'))
+        channelData.verify = channel.id
+
+        fs.writeFileSync('./data/channels.json', JSON.stringify(channelData, null, 2))
+        //CRUD FOR REUSE
         const verifyEmbed = new EmbedBuilder()
         .setTitle("<a:verificadoanimado:903694601855045653> | Verificación | <a:verificadoanimado:903694601855045653>")
         .setDescription('¡Hola! Para poder verificarte e interactuar con la comunidad y canales, debes hacer clic en el botón "**Verificar**"')
